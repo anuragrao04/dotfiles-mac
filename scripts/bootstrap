@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")/.."
+if ! command -v stow >/dev/null 2>&1; then
+  if command -v brew >/dev/null 2>&1; then
+    brew install stow
+  else
+    echo "GNU stow not found. Install Homebrew or run: brew install stow" >&2
+    exit 1
+  fi
+fi
+backup_dir="$HOME/.dotfiles-backup-$(date +%Y%m%d-%H%M%S)"
+conflicts=()
+while IFS= read -r p; do
+  rel="${p#./*/}"
+  target="$HOME/$rel"
+  [ -e "$target" ] || [ -L "$target" ] || continue
+  if [ -L "$target" ]; then
+    link_target="$(readlink "$target")"
+    case "$link_target" in
+      *dotfiles-mac*) continue ;;
+    esac
+  fi
+  conflicts+=("$rel")
+done < <(find zsh git shell-tools fish kitty nvim tmux starship sesh taskell karabiner zed gh opencode -type f | sed 's#^#./#')
+if [ "${#conflicts[@]}" -gt 0 ]; then
+  mkdir -p "$backup_dir"
+  for rel in "${conflicts[@]}"; do
+    mkdir -p "$backup_dir/$(dirname "$rel")"
+    mv "$HOME/$rel" "$backup_dir/$rel"
+  done
+  echo "Backed up existing files to: $backup_dir"
+fi
+./scripts/stow

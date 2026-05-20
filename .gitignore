@@ -1,0 +1,16 @@
+.DS_Store
+*.swp
+*.tmp
+
+# Never commit secrets or generated state
+**/.config/gh/hosts.yml
+**/.config/opencode/node_modules/
+**/.config/opencode/.git/
+**/.config/opencode/.env
+**/.config/gcloud/
+**/.config/gws/
+**/.config/raycast/
+**/.config/zed/conversations/
+**/.config/zed/prompts/
+**/.config/karabiner/automatic_backups/
+**/.npmrc

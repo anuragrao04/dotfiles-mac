@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")/.."
+if ! command -v stow >/dev/null 2>&1; then
+  if command -v brew >/dev/null 2>&1; then
+    brew install stow
+  else
+    echo "GNU stow not found. Install it first: brew install stow" >&2
+    exit 1
+  fi
+fi
+mapfile -t packages < packages.txt
+stow --target="$HOME" --restow "${packages[@]}"
+echo "Stowed: ${packages[*]}"

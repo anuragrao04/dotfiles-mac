@@ -1,0 +1,14 @@
+zsh
+git
+shell-tools
+fish
+kitty
+nvim
+tmux
+starship
+sesh
+taskell
+karabiner
+zed
+gh
+opencode

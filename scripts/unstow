@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")/.."
+mapfile -t packages < packages.txt
+stow --target="$HOME" --delete "${packages[@]}"
+echo "Unstowed: ${packages[*]}"

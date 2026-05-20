@@ -1,0 +1,16 @@
+[user]
+	email = raoanu2004@gmail.com
+	name = anuragrao04
+	signingkey = 9FA0B6F4AB81880A
+[difftool "meldi"]
+	cmd = meldi $LOCAL $REMOTE
+[push]
+	autoSetupRemote = true
+[commit]
+	gpgsign = true
+[gpg]
+	program = /opt/homebrew/bin/gpg
+[http]
+	sslCAInfo = /Users/anurag.rao/stupid-corporate-ssl-cert.cer
+[pull]
+	rebase = true

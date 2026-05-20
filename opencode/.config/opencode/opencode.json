@@ -1,0 +1,217 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permission": {
+    "edit": "ask",
+    "bash": {
+      "*": "ask",
+      "cd *": "allow",
+      "git reflog *": "allow",
+      "git log *": "allow",
+      "echo *": "allow",
+      "head *": "allow",
+      "ls *": "allow",
+      "rg *": "allow",
+      "git status *": "allow",
+      "git show *": "allow",
+      "sort *": "allow",
+      "uniq *": "allow",
+      "grep *": "allow",
+      "cat *": "allow",
+      "git diff *": "allow",
+      "wc *": "allow",
+      "comm *": "allow",
+      "diff *": "allow",
+      "sleep *": "allow",
+      "tail *": "allow",
+      "file *": "allow",
+      "which *": "allow",
+      "type *": "allow",
+      "ps *": "allow",
+      "pwd": "allow",
+      "du *": "allow",
+      "df *": "allow",
+      "stat *": "allow",
+      "man *": "allow",
+      "help *": "allow",
+      "uname *": "allow",
+      "date *": "allow",
+      "jq *": "allow",
+      "yq *": "allow",
+      "curl *": "allow",
+      "openssl *": "allow",
+      "base64 *": "allow",
+      "xxd *": "allow",
+      "hexdump *": "allow",
+      "tr *": "allow",
+      "cut *": "allow",
+      "paste *": "allow",
+      "column *": "allow",
+      "awk *": "allow",
+      "sed *": "allow",
+      "xargs *": "allow",
+      "git blame *": "allow",
+      "git stash list *": "allow",
+      "go list *": "allow",
+      "go env *": "allow",
+      "make *": "allow",
+      "docker ps *": "allow",
+      "docker inspect *": "allow",
+      "helm list *": "allow",
+      "helm status *": "allow"
+    },
+    "context7_*": "allow",
+    "aws_*": "allow",
+    "k8s_*": "allow"
+  },
+  "provider": {
+    "litellm": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "LiteLLM",
+      "options": {
+        "baseURL": "https://llm-gateway.razorpay.com/v1"
+      },
+      "models": {
+        "kimi-k2p6": {
+          "name": "Kimi K2.6",
+          "cost": {
+            "input": 0.95,
+            "output": 4,
+            "cache": {
+              "read": 0.16,
+              "write": 0
+            }
+          }
+        },
+        "glm-5p1": {
+          "name": "GLM 5.1"
+        },
+        "minimax-m2p7": {
+          "name": "Minimax M2.7",
+          "cost": {
+            "input": 0.3,
+            "output": 1.2,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        },
+        "qwen3": {
+          "name": "Qwen 3",
+          "cost": {
+            "input": 0.15,
+            "output": 0.6,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          },
+          "limit": {
+            "context": 262144,
+            "output": 262144
+          }
+        },
+        "gpt-5.4": {
+          "name": "GPT 5.4",
+          "cost": {
+            "input": 2.5,
+            "output": 15,
+            "cache": {
+              "read": 0.25,
+              "write": 0
+            }
+          },
+          "limit": {
+            "context": 1050000,
+            "output": 128000
+          }
+        },
+        "gpt-5.4-mini": {
+          "name": "GPT 5.4 Mini",
+          "cost": {
+            "input": 0.75,
+            "output": 4.5,
+            "cache": {
+              "read": 0.075,
+              "write": 0
+            }
+          },
+          "limit": {
+            "context": 272000,
+            "output": 128000
+          }
+        },
+        "gpt-5.4-nano": {
+          "name": "GPT 5.4 Nano",
+          "cost": {
+            "input": 0.2,
+            "output": 1.25,
+            "cache": {
+              "read": 0.02,
+              "write": 0
+            }
+          },
+          "limit": {
+            "context": 272000,
+            "output": 128000
+          }
+        },
+        "deepseek-v4-pro": {
+          "name": "DeepSeek V4 Pro",
+          "cost": {
+            "input": 1.74,
+            "output": 3.48,
+            "cache": {
+              "read": 0,
+              "write": 0
+            }
+          }
+        }
+      }
+    }
+  },
+  "mcp": {
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "CONTEXT7_API_KEY": "${CONTEXT7_API_KEY}"
+      },
+      "enabled": false
+    },
+    "aws_mcp": {
+      "type": "remote",
+      "url": "https://friday-aws-mcp-concierge.razorpay.com/",
+      "enabled": false
+    },
+    "k8s_mcp": {
+      "type": "remote",
+      "url": "https://friday-mcp.razorpay.com/",
+      "enabled": false
+    },
+    "coralogix_mcp": {
+      "type": "remote",
+      "url": "https://api.coralogix.in/mgmt/api/v1/mcp",
+      "headers": {
+        "Authorization": "${CORALOGIX_MCP_AUTHORIZATION}"
+      },
+      "enabled": false
+    },
+    "slack-mcp": {
+      "type": "remote",
+      "url": "https://mcp.slack.com/mcp",
+      "oauth": {
+        "clientId": "3660753192626.8903469228982"
+      },
+      "enabled": true
+    },
+    "spinnaker-mcp": {
+      "type": "remote",
+      "url": "https://spinnaker-mcp.razorpay.com",
+      "enabled": false
+    }
+  },
+  "compaction": {
+    "prune": false
+  }
+}
