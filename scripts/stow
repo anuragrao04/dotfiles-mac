@@ -9,6 +9,9 @@ if ! command -v stow >/dev/null 2>&1; then
     exit 1
   fi
 fi
-mapfile -t packages < packages.txt
+packages=()
+while IFS= read -r package; do
+  [ -n "$package" ] && packages+=("$package")
+done < packages.txt
 stow --target="$HOME" --restow "${packages[@]}"
 echo "Stowed: ${packages[*]}"
