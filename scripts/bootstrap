@@ -18,11 +18,21 @@ if pgrep -x Raycast >/dev/null 2>&1; then
   sleep 1
 fi
 
+repo_real="$(pwd -P)"
 conflicts=()
 while IFS= read -r p; do
   rel="${p#./*/}"
   target="$HOME/$rel"
   [ -e "$target" ] || [ -L "$target" ] || continue
+
+  # If Stow linked a parent directory, the file itself may look like a regular
+  # file through $HOME even though it resolves back into this repo. Never move
+  # those files into the backup directory.
+  target_real="$(realpath "$target" 2>/dev/null || true)"
+  case "$target_real" in
+    "$repo_real"/*) continue ;;
+  esac
+
   if [ -L "$target" ]; then
     link_target="$(readlink "$target")"
     case "$link_target" in
