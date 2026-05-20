@@ -5,7 +5,7 @@ Mac dotfiles managed with GNU Stow.
 ## First setup on a Mac
 
 ```bash
-brew install stow
+brew install stow zsh-syntax-highlighting
 git clone git@github.com:anuragrao04/dotfiles-mac.git ~/repos/personal/dotfiles-mac
 cd ~/repos/personal/dotfiles-mac
 ./scripts/bootstrap

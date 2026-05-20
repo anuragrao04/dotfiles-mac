@@ -9,6 +9,9 @@ if ! command -v stow >/dev/null 2>&1; then
     exit 1
   fi
 fi
+if command -v brew >/dev/null 2>&1; then
+  brew list zsh-syntax-highlighting >/dev/null 2>&1 || brew install zsh-syntax-highlighting
+fi
 backup_dir="$HOME/.dotfiles-backup-$(date +%Y%m%d-%H%M%S)"
 
 # Raycast can immediately recreate its preferences while running, causing Stow

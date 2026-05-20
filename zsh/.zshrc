@@ -28,7 +28,6 @@ path=(
 )
 typeset -U path PATH
 
-export NODE_EXTRA_CA_CERTS="$HOME/.certs/ZscalerRootCA.crt"
 export BUN_INSTALL="$HOME/.bun"
 export PYENV_ROOT="$HOME/.pyenv"
 export NVM_DIR="$HOME/.nvm"
@@ -137,8 +136,16 @@ if command -v zoxide >/dev/null 2>&1; then
 fi
 
 # Syntax highlighting. Keep this near the end so it wraps ZLE widgets correctly.
-[[ -r "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] && \
-  source "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+for __zsh_syntax_highlighting in \
+  "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" \
+  "/opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" \
+  "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"; do
+  if [[ -r "$__zsh_syntax_highlighting" ]]; then
+    source "$__zsh_syntax_highlighting"
+    break
+  fi
+done
+unset __zsh_syntax_highlighting
 
 # Lazy loaders --------------------------------------------------------------
 # nvm: load only when explicitly requested.
