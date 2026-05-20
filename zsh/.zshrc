@@ -75,16 +75,6 @@ if [[ -x /opt/homebrew/bin/starship ]]; then
   add-zsh-hook precmd prompt_starship_precmd
   add-zsh-hook preexec prompt_starship_preexec
 
-  # Add one blank line before prompts after a command has run, but not at startup.
-  __prompt_spacer_preexec() { __PROMPT_NEEDS_SPACER=1 }
-  __prompt_spacer_precmd() {
-    if [[ -n "$__PROMPT_NEEDS_SPACER" ]]; then
-      print -r -- ""
-      unset __PROMPT_NEEDS_SPACER
-    fi
-  }
-  add-zsh-hook preexec __prompt_spacer_preexec
-  add-zsh-hook precmd __prompt_spacer_precmd
 
   export STARSHIP_SHELL=zsh
   export STARSHIP_SESSION_KEY="${RANDOM}${RANDOM}${RANDOM}${RANDOM}"
