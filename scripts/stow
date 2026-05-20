@@ -15,4 +15,3 @@ while IFS= read -r package; do
 done < packages.txt
 stow --target="$HOME" --restow "${packages[@]}"
 echo "Stowed: ${packages[*]}"
-./scripts/apply-raycast --open
