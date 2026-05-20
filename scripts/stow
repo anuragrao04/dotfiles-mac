@@ -13,21 +13,6 @@ packages=()
 while IFS= read -r package; do
   [ -n "$package" ] && packages+=("$package")
 done < packages.txt
-
-manage_raycast=0
-for package in "${packages[@]}"; do
-  [ "$package" = "raycast" ] && manage_raycast=1
-done
-
-if [ "$manage_raycast" -eq 1 ] && pgrep -x Raycast >/dev/null 2>&1; then
-  osascript -e 'tell application "Raycast" to quit' >/dev/null 2>&1 || true
-  sleep 1
-fi
-
 stow --target="$HOME" --restow "${packages[@]}"
 echo "Stowed: ${packages[*]}"
-
-if [ "$manage_raycast" -eq 1 ]; then
-  killall cfprefsd >/dev/null 2>&1 || true
-  open -a Raycast >/dev/null 2>&1 || true
-fi
+./scripts/apply-raycast --open

@@ -13,4 +13,3 @@ zed
 gh
 opencode
 
-raycast

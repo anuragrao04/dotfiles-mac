@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+src="raycast/Library/Preferences/com.raycast.macos.plist"
+dst="$HOME/Library/Preferences/com.raycast.macos.plist"
+[ -f "$src" ] || exit 0
+
+was_running=0
+if pgrep -x Raycast >/dev/null 2>&1; then
+  was_running=1
+  osascript -e 'tell application "Raycast" to quit' >/dev/null 2>&1 || true
+  sleep 1
+fi
+
+mkdir -p "$(dirname "$dst")"
+# macOS preferences are managed by cfprefsd and are unreliable as symlinks.
+# Use a real copied plist instead of Stow for Raycast.
+if [ -e "$dst" ] || [ -L "$dst" ]; then
+  if [ -L "$dst" ]; then
+    rm "$dst"
+  else
+    backup_dir="$HOME/.dotfiles-backup-raycast-$(date +%Y%m%d-%H%M%S)"
+    mkdir -p "$backup_dir/Library/Preferences"
+    cp "$dst" "$backup_dir/Library/Preferences/com.raycast.macos.plist"
+  fi
+fi
+cp "$src" "$dst"
+killall cfprefsd >/dev/null 2>&1 || true
+
+if [ "$was_running" -eq 1 ] || [ "${1:-}" = "--open" ]; then
+  open -a Raycast >/dev/null 2>&1 || true
+fi
+
+echo "Applied Raycast preferences"
