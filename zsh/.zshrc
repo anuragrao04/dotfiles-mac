@@ -55,7 +55,8 @@ done
 # ---- Prompt ---------------------------------------------------------------
 # Starship prompt, wired manually so startup doesn't run `starship init zsh`.
 # The prompt itself calls starship when drawn; shell config load stays tiny.
-if [[ -x /opt/homebrew/bin/starship ]]; then
+STARSHIP_BIN="${commands[starship]:-${STARSHIP_BIN:-}}"
+if [[ -n "$STARSHIP_BIN" && -x "$STARSHIP_BIN" ]]; then
   zmodload zsh/parameter
   zmodload zsh/datetime
   zmodload zsh/mathfunc
@@ -79,7 +80,7 @@ if [[ -x /opt/homebrew/bin/starship ]]; then
   export STARSHIP_SHELL=zsh
   export STARSHIP_SESSION_KEY="${RANDOM}${RANDOM}${RANDOM}${RANDOM}"
   VIRTUAL_ENV_DISABLE_PROMPT=1
-  PROMPT='$(/opt/homebrew/bin/starship prompt --terminal-width="$COLUMNS" --status="${STARSHIP_CMD_STATUS:-}" --pipestatus="${STARSHIP_PIPE_STATUS[*]:-}" --cmd-duration="${STARSHIP_DURATION:-}" --jobs="$STARSHIP_JOBS_COUNT")'
+  PROMPT='$($STARSHIP_BIN prompt --terminal-width="$COLUMNS" --status="${STARSHIP_CMD_STATUS:-}" --pipestatus="${STARSHIP_PIPE_STATUS[*]:-}" --cmd-duration="${STARSHIP_DURATION:-}" --jobs="$STARSHIP_JOBS_COUNT")'
   RPROMPT=''
   PROMPT2='%F{8}∙%f '
 else
