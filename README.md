@@ -35,6 +35,8 @@ git pull
 ./scripts/stow
 ```
 
+Raycast preferences are included via `~/Library/Preferences/com.raycast.macos.plist`. Quit Raycast before pulling/stowing if you want those settings/hotkeys to apply cleanly, then reopen Raycast.
+
 If you create a new dotfile that is not yet stowed, add it to a package manually or update `scripts/sync-from-home`, then commit it.
 
 ## Pull current live files into the repo
