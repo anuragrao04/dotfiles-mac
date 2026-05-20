@@ -22,7 +22,6 @@ copy_file "$HOME/.config/karabiner/karabiner.json" karabiner/.config/karabiner/k
 copy_dir "$HOME/.config/karabiner/assets/complex_modifications" karabiner/.config/karabiner/assets/complex_modifications
 copy_file "$HOME/.config/zed/settings.json" zed/.config/zed/settings.json
 copy_file "$HOME/.config/gh/config.yml" gh/.config/gh/config.yml
-copy_file "$HOME/Library/Preferences/com.raycast.macos.plist" raycast/Library/Preferences/com.raycast.macos.plist
 copy_file "$HOME/.config/opencode/AGENTS.md" opencode/.config/opencode/AGENTS.md
 [ -f "$HOME/.config/opencode/package.json" ] && copy_file "$HOME/.config/opencode/package.json" opencode/.config/opencode/package.json
 [ -f "$HOME/.config/opencode/package-lock.json" ] && copy_file "$HOME/.config/opencode/package-lock.json" opencode/.config/opencode/package-lock.json
